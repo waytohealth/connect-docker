@@ -1,12 +1,12 @@
 FROM openjdk:11-jre
 
-RUN apt-get clean && apt-get update && apt-get install -y --no-install-recommends locales postgresql-client mysql-client \
+RUN apt-get clean && apt-get update && apt-get install -y --no-install-recommends locales postgresql-client default-mysql-client \
     && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-RUN curl -SL 'https://s3.amazonaws.com/downloads.mirthcorp.com/connect/3.8.1.b246/mirthconnect-3.8.1.b246-unix.tar.gz' \
+RUN curl -SL 'https://s3.amazonaws.com/downloads.mirthcorp.com/connect/3.9.0.b2526/mirthconnect-3.9.0.b2526-unix.tar.gz' \
     | tar -xzC /opt \
     && mv "/opt/Mirth Connect" /opt/connect
 
