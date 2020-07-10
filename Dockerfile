@@ -22,7 +22,7 @@ RUN (cat mcserver.vmoptions /opt/connect/docs/mcservice-java9+.vmoptions ; echo 
 EXPOSE 8443
 
 # Set container timezone to Eastern Time
-RUN rm -fv /etc/localtime && ln -sv /usr/share/zoneinfo/America/New_York /etc/localtime
+RUN rm -fv /etc/localtime && ln -sv /usr/share/zoneinfo/America/New_York /etc/localtime && echo 'America/New_York' > /etc/timezone
 
 COPY entrypoint.sh /
 RUN chmod 755 /entrypoint.sh
