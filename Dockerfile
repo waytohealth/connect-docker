@@ -28,6 +28,11 @@ EXPOSE 8443
 # Set container timezone to Eastern Time
 RUN rm -fv /etc/localtime && ln -sv /usr/share/zoneinfo/America/New_York /etc/localtime && echo 'America/New_York' > /etc/timezone
 
+# Install UPHS's CA certificate
+COPY mysql-apt-config_0.8.15-1_all.deb /tmp/
+COPY uphscert.der /tmp
+RUN keytool -import -alias uphscert -cacerts -file /tmp/uphscert.der -noprompt -storepass changeit
+
 COPY entrypoint.sh /
 RUN chmod 755 /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
